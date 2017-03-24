@@ -6,12 +6,14 @@ using namespace std;
 void start();
 void loading();
 void enter(int);
-void moves();
-void check();
+void moves(int);
+void check(int);
+void check1();
+void display();
 int main()
 {
   int m[3][3];
-
+  char c;
   start();
   loading();
   //delay(2000);
@@ -23,8 +25,12 @@ int main()
         cout<<"\t\t\t\t\t__|__|__\t\n";
         cout<<"\n";
        }
-       enter(m[3][3]);
-       moves();
+       cout<<"\ndo you want to take first move(y/n)";
+       cin>>y;
+       if(c=='y'||c=='Y')
+       {enter(m[3][3]);}
+       else
+       {moves(m[3][3]);}
 
 
 
@@ -56,21 +62,21 @@ void loading()
    // delay(3000);
     cout<<"\nlet's play";
 }     // complete it
-void enter(int m[3][3]);
+void enter(int m[3][3])
 {
 int x,y;
 cout<<"\nEnter coordintes";
 cin>>x>>y;
 if((x<=3)&&(y<=3))
    {
-    X=m[x=1][y+1];
+    m[x=1][y+1]=X;
     check();
    }
 else
 {
     cout<<"\nenter coordinates between 1,3";
     cin>>x>>y;
-    X=m[x=1][y+1];
+    m[x=1][y+1]=X;
     check();
 }
 for(int i=0;i<3;i++)
@@ -82,35 +88,65 @@ for(int i=0;i<3;i++)
     cout<<"\n";
 }
 }
-void moves()
+void moves(int m[3][3])
 {
     for(int i=0;i<3;i++)
 {
     for(int j=0;j<3;j++)
     {
         if(m[i][j]==' ')
-        O=m[i][j];
-        check();
+        m[i][j]=O;
+        check1();
     }
 }
-
 }
-void check()
+
+void check(int m[3][3])
 {
-     for(int i=0;i<3;i++)
+    int i,j;
+     for(i=0,j=0;i<3,j<3;i++,j++)
 {
-    if((m[i][0]==m[i][1])&&(m[i][1]==m[i][2]))
+     if((m[i][0]==m[i][1])&&(m[i][1]==m[i][2]))
     {
      cout<<"\nwinner";
      break();
     }
-    for(int j=0;j<3;j++)
-    {
-        if((m[0][j]==m[1][j])&&(m[1][j]==m[2][j]))
+
+       else if((m[0][j]==m[1][j])&&(m[1][j]==m[2][j]))
         {cout<<"\nwinner";
-        break();
+        break();}
+       else if((m[0][0]==m[1][1])&&(m[1][1]==m[2][2]))
+        {cout<<"\nwinner diagonal";
+        break();}
+        else
+        moves();
+}
+}
+void check1()
+{
+    int i,j;
+     for(i=0,j=0;i<3,j<3;i++,j++)
+ {
+     if((m[i][0]==m[i][1])&&(m[i][1]==m[i][2]))
+    {
+     cout<<"\nwinner";
+     break();
     }
 
+       else if((m[0][j]==m[1][j])&&(m[1][j]==m[2][j]))
+        {cout<<"\nwinner";
+        break();}
+       else if((m[0][0]==m[1][1])&&(m[1][1]==m[2][2]))
+        {cout<<"\nwinner diagonal";
+        break();}
+        else
+        {
+            enter();
+        }
+ }
+}
+void display()
+{
 
 }
 
